@@ -227,10 +227,11 @@ def tokenize_and_postprocess_data(prompt: str,
                                   max_length: int,
                                   pad_token_id: int,
                                   left_pad=True,
-                                  truncation='error'):
+                                  truncation='right'):
     """
     input_data is the output from tokenizer.
     """
+    truncation = 'right'
     assert truncation in ['left', 'right', 'error']
 
     input_data = tokenizer(prompt, return_tensors='pt', add_special_tokens=False)
@@ -241,6 +242,7 @@ def tokenize_and_postprocess_data(prompt: str,
     assert input_ids.ndim == 2
 
     sequence_length = input_ids.shape[-1]
+    
     if sequence_length < max_length:
         input_ids = pad_sequence_to_length(input_ids,
                                            max_seq_len=max_length,
