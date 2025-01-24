@@ -30,6 +30,8 @@ def _select_rm_score_fn(data_source):
         return multiply.compute_score
     elif "countdown" in data_source:
         return countdown.compute_score
+    elif "arc-agi" in data_source:
+        return arc.compute_score
     else:
         raise NotImplementedError
 
